@@ -1,4 +1,5 @@
 import os
+import random
 
 print('WELCOME TO THE ALTERNATE ID GENERATOR')
 print('GENERATE A NEW NAME')
@@ -13,20 +14,24 @@ def get_names(filename):
     file.close()
     return names
 
-def print_names(gender, last_names):
-    print('printing names')
-    return 'n/a'
+def print_names(gender_names, last_names):
+    first_name, last_name = gender_names[random.randint(0, len(gender_names) - 1)], last_names[random.randint(0, len(last_names) - 1)]
+    print('Your name: ' + first_name.upper() + ' ' + last_name.upper())
+    print()
 
 another_name, male_names, female_names, last_names = 'y', get_names('first-names-male'), get_names('first-names-female') , get_names('last-names')
 
 while another_name.lower() == 'y':
-    gender = 'x'
-    while gender.lower() != 'm' or gender.lower !='f':
+    while another_name.lower() == 'y':
         gender = input('Male or female name? (m/f): ')
         if gender.lower() == 'm':
-            print('getting male names')
+            print_names(male_names, last_names)
+            break
         elif gender.lower() == 'f':
-            print('getting female names')
+            print_names(female_names, last_names)
+            break
+        else:
+            print('invalid selection, please try again!')
     
     another_name = input('Generate another name? (y/n): ')
 
